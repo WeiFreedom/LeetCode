@@ -5,7 +5,7 @@ using System.Text;
 namespace LeetCode
 {
 
-   public class Number
+    public class Number
     {
         /// <summary>
         /// 回文数
@@ -26,10 +26,26 @@ namespace LeetCode
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public bool IsPalindrome(int x)
+        public static bool IsPalindrome(int x)
         {
-
-            return true;
+            //如果是负数 肯定不是一个回文数
+            if (x < 0) return false;
+            //个位数 肯定是一个回文数
+            if (0 <= x && x < 10) return true;
+            //大于10的数字
+            int result = 0;
+            int number = 0;
+            int tempX = x;
+            while (tempX > 0)//121
+            {
+                number = tempX % 10;//1 2 1
+                result = result * 10 + number;//1 12 121
+                tempX = (tempX - number) / 10;//12 1
+            }
+            if (result == x)
+                return true;
+            else
+                return false;
         }
 
     }
