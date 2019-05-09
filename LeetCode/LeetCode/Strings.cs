@@ -81,5 +81,63 @@ namespace LeetCode
 
             return result;
         }
+
+        /// <summary>
+        /// 编写一个函数来查找字符串数组中的最长公共前缀。
+        ///
+        ///    如果不存在公共前缀，返回空字符串 ""。
+        ///
+        ///    示例 1:
+        ///
+        ///    输入: ["flower","flow","flight"]
+        ///            输出: "fl"
+        ///    示例 2:
+        ///
+        ///    输入: ["dog","racecar","car"]
+        ///            输出: ""
+        ///    解释: 输入不存在公共前缀。
+        ///    说明:
+        ///
+        ///    所有输入只包含小写字母 a-z 。
+        /// </summary>
+        /// <param name="strs"></param>
+        /// <returns></returns>
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            if (strs == null || strs.Length == 0)
+            {
+                return "";
+            }
+            int minLength = strs[0].Length;
+            for (int index = 1; index < strs.Length; index++)
+            {
+                if (minLength > strs[index].Length)
+                    minLength = strs[index].Length;
+            }
+            char[] chars = new char[minLength];
+            bool returnFlag = false;
+            for (int index = 0; index < minLength; index++)
+            {
+                foreach (string str in strs)
+                {
+                    if (chars[index] == '\0')
+                    {
+                        chars[index] = str[index];
+                    }
+                    else if (chars[index] != str[index])
+                    {
+                        chars[index] = '\0';
+                        returnFlag = true;
+                        break;
+                    }
+                    
+                }
+                if (returnFlag)
+                    break;
+            }
+            return (new string(chars)).TrimEnd('\0');
+
+        }
+
     }
 }
